@@ -1,5 +1,6 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
+import pandas as pd
 
 # Um transformador dummieficador
 
@@ -13,9 +14,9 @@ class Dummificador(BaseEstimator, TransformerMixin):
 
     def transform(self, X):
         # Primeiro realizamos a cópia do DataFrame 'X' de entrada
-        data = X.copy()
+        data = pd.get_dummies(X,columns=self.columns)
         # Retornamos um novo dataframe sem as colunas indesejadas
-        return data[columns]
+        return data
 
 
 # Um transformador para remover colunas indesejadas
@@ -30,4 +31,4 @@ class MantemColunas(BaseEstimator, TransformerMixin):
         # Primeiro realizamos a cópia do DataFrame 'X' de entrada
         data = X.copy()
         # Retornamos um novo dataframe sem as colunas indesejadas
-        return data[columns]
+        return data[self.columns]
